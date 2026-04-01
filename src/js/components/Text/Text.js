@@ -81,6 +81,9 @@ const Text = forwardRef(
         size={size}
         {...passThemeFlag}
         {...rest}
+        tabIndex={
+          rest.tabIndex ?? (tipProp !== undefined || truncate === 'tip' ? 0 : undefined)
+        }
         ref={textRef}
       >
         {children !== undefined ? (

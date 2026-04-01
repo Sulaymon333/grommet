@@ -17,11 +17,11 @@
     "Shimrit Yacobi"
   ],
   "homepage": "http://grommet.io",
-  "bugs": "https://github.com/Sulaymon333/grommet/issues",
+  "bugs": "https://github.com/grommet/grommet/issues",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sulaymon333/grommet.git"
+    "url": "https://github.com/grommet/grommet.git"
   },
   "engines": {
     "node": ">= 16"

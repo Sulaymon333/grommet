@@ -9,7 +9,7 @@ import React, {
 import { Box } from '../Box';
 import { Drop } from '../Drop';
 import { Keyboard } from '../Keyboard';
-import { useForwardedRef, useKeyboard } from '../../utils';
+import { useForwardedRef, useId, useKeyboard } from '../../utils';
 import { TipPropTypes } from './propTypes';
 import { useThemeValue } from '../../utils/useThemeValue';
 
@@ -37,6 +37,7 @@ const Tip = forwardRef(
     const [over, setOver] = useState(false);
     const [tooltipOver, setTooltipOver] = useState(false);
     const usingKeyboard = useKeyboard();
+    const tooltipId = useId();
 
     const componentRef = useForwardedRef(tipRef);
 
@@ -68,6 +69,9 @@ const Tip = forwardRef(
         if (usingKeyboard) setOver(false);
         if (child.props?.onBlur) child.props.onBlur(event);
       },
+      'aria-describedby': [child.props['aria-describedby'], tooltipId]
+        .filter(Boolean)
+        .join(' '),
       key: 'tip-child',
       ref: (node) => {
         // https://github.com/facebook/react/issues/8873#issuecomment-287873307
@@ -109,7 +113,15 @@ const Tip = forwardRef(
             onMouseEnter={() => setTooltipOver(true)}
             onMouseLeave={() => setTooltipOver(false)}
           >
-            {plain ? content : <Box {...theme.tip.content}>{content}</Box>}
+            {plain ? (
+              <span id={tooltipId} role="tooltip">
+                {content}
+              </span>
+            ) : (
+              <Box id={tooltipId} role="tooltip" {...theme.tip.content}>
+                {content}
+              </Box>
+            )}
           </Drop>
         </Keyboard>
       ),

@@ -102,6 +102,8 @@ exports[`Tip dropProps should pass props to Drop 1`] = `
   >
     <div
       class="c2"
+      id="_r_7_"
+      role="tooltip"
     >
       hello dropProps
     </div>
@@ -185,6 +187,7 @@ exports[`Tip focus and blur events on the Tip's child 1`] = `
   class="c0"
 >
   <button
+    aria-describedby="_r_3_"
     class="c1"
     type="button"
   >
@@ -198,6 +201,7 @@ exports[`Tip focus and blur events on the Tip's child 2`] = `
   class="StyledGrommet-sc-19lkkz7-0 iQmOCy"
 >
   <button
+    aria-describedby="_r_3_"
     class="StyledButton-sc-323bzc-0 eJnOht"
     type="button"
   >
@@ -314,6 +318,8 @@ exports[`Tip mouseOver and mouseOut events on the Tip's child 1`] = `
 >
   <div
     class="c2"
+    id="_r_2_"
+    role="tooltip"
   >
     <div
       class="c3"
@@ -373,24 +379,29 @@ exports[`Tip plain 1`] = `
   }
 }
 
-<div>
+<div
+  aria-hidden="false"
+>
   <div
-    aria-hidden="false"
+    class="c0 c1"
+    data-g-portal-id="0"
+    style="left: 0px; width: 0.1px; top: 0px; max-height: 768px;"
+    tabindex="-1"
   >
-    <div
-      class="c0 c1"
-      data-g-portal-id="0"
-      style="left: 0px; width: 0.1px; top: 0px; max-height: 768px;"
-      tabindex="-1"
+    <span
+      id="_r_4_"
+      role="tooltip"
     >
       tooltip
-    </div>
+    </span>
   </div>
 </div>
 `;
 
 exports[`Tip renders outside grommet wrapper 1`] = `
-<span>
+<span
+  aria-describedby="_r_1_"
+>
    Example
 </span>
 `;
@@ -497,6 +508,8 @@ exports[`Tip should be visible by default 1`] = `
   >
     <div
       class="c2"
+      id="_r_f_"
+      role="tooltip"
     >
       tooltip
     </div>
@@ -518,7 +531,9 @@ exports[`Tip should have no accessibility violations 1`] = `
 <div
   class="c0"
 >
-  <span>
+  <span
+    aria-describedby="_r_0_"
+  >
      Example
   </span>
 </div>
@@ -538,7 +553,9 @@ exports[`Tip should work with a child that isn't a React Element 1`] = `
 <div
   class="c0"
 >
-  <span>
+  <span
+    aria-describedby="_r_8_"
+  >
     Not React Element
   </span>
 </div>
@@ -558,7 +575,9 @@ exports[`Tip shouldn't crash with no children 1`] = `
 <div
   class="c0"
 >
-  <span />
+  <span
+    aria-describedby="_r_9_"
+  />
 </div>
 `;
 
@@ -666,6 +685,8 @@ exports[`Tip themed 1`] = `
   >
     <div
       class="c2"
+      id="_r_5_"
+      role="tooltip"
     >
       tooltip
     </div>
@@ -775,6 +796,8 @@ exports[`Tip tip content margin overides global drop margin 1`] = `
   >
     <div
       class="c2"
+      id="_r_6_"
+      role="tooltip"
     >
       tooltip
     </div>
