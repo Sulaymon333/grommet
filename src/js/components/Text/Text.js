@@ -92,14 +92,21 @@ const Text = forwardRef(
       </StyledText>
     );
 
+    // When tip is a string, use it as the tooltip content.
+    // When tip is an object, spread it as props (content comes from tipProp.content).
     const tipProps = tipProp && typeof tipProp === 'object' ? tipProp : {};
 
     if (tipProp || textTruncated) {
       // place the text content in a tip if truncate === 'tip'
       // and the text has been truncated
       if (textTruncated) {
+        // For string tip, the string IS the content. For object tip, content
+        // comes from tipProps.content via spread. For no tip (textTruncated
+        // only), fall back to the visible children text.
+        const truncatedContent =
+          typeof tipProp === 'string' ? tipProp : children;
         return (
-          <Tip content={children} {...tipProps}>
+          <Tip content={truncatedContent} {...tipProps}>
             {styledTextResult}
           </Tip>
         );
@@ -107,7 +114,15 @@ const Text = forwardRef(
       // place the text content in a tip if truncate !== 'tip'
       // it displays even if the text has not truncated
       if (truncate !== 'tip') {
-        return <Tip {...tipProps}>{styledTextResult}</Tip>;
+        // For string tip, the string IS the tooltip content.
+        // For object tip, content comes from tipProps.content via spread.
+        const tipContent =
+          typeof tipProp === 'string' ? tipProp : undefined;
+        return (
+          <Tip content={tipContent} {...tipProps}>
+            {styledTextResult}
+          </Tip>
+        );
       }
     }
 

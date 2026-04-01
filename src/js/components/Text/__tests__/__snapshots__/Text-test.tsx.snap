@@ -424,7 +424,7 @@ exports[`renders tip 1`] = `
   class="c0"
 >
   <span
-    aria-describedby="_r_0_"
+    aria-description="tooltip"
     class="c1"
     tabindex="0"
   >

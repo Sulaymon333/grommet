@@ -53,6 +53,15 @@ const Tip = forwardRef(
       )) ||
       Children.only(children);
 
+    // When content is a plain string, use aria-description (ARIA 1.3) to
+    // provide the description inline on the trigger element. This ensures
+    // screen readers always announce the tooltip content when the element
+    // receives focus, without needing a referenced DOM element. It avoids
+    // the "aria-describedby element ID does not exist" axe violation that
+    // occurs when the tooltip Drop hasn't rendered yet.
+    // When content is a React node, fall back to conditional aria-describedby.
+    const isStringContent = typeof content === 'string';
+
     const clonedChild = cloneElement(child, {
       onMouseEnter: (event) => {
         setOver(true);
@@ -70,11 +79,24 @@ const Tip = forwardRef(
         if (usingKeyboard) setOver(false);
         if (child.props?.onBlur) child.props.onBlur(event);
       },
-      'aria-describedby': isVisible
-        ? [child.props['aria-describedby'], tooltipId]
-            .filter(Boolean)
-            .join(' ')
-        : child.props['aria-describedby'],
+      ...(isStringContent
+        ? {
+            // aria-description is always present for string content, so the
+            // screen reader reads it at focus time without waiting for a
+            // re-render. No DOM element reference needed.
+            'aria-description': [child.props['aria-description'], content]
+              .filter(Boolean)
+              .join(' ') || undefined,
+          }
+        : {
+            // For React node content, reference the tooltip Drop element.
+            // Only set when visible to avoid dangling ID references (axe).
+            'aria-describedby': isVisible
+              ? [child.props['aria-describedby'], tooltipId]
+                  .filter(Boolean)
+                  .join(' ')
+              : child.props['aria-describedby'],
+          }),
       key: 'tip-child',
       ref: (node) => {
         // https://github.com/facebook/react/issues/8873#issuecomment-287873307
@@ -99,6 +121,8 @@ const Tip = forwardRef(
 
     return [
       clonedChild,
+      // Visual tooltip Drop for sighted users. For React node content, the
+      // Drop also has id + role="tooltip" so aria-describedby can reference it.
       isVisible && (
         <Keyboard
           key="tip-keyboard"
@@ -117,11 +141,16 @@ const Tip = forwardRef(
             onMouseLeave={() => setTooltipOver(false)}
           >
             {plain ? (
-              <span id={tooltipId} role="tooltip">
+              <span
+                {...(isStringContent ? {} : { id: tooltipId, role: 'tooltip' })}
+              >
                 {content}
               </span>
             ) : (
-              <Box id={tooltipId} role="tooltip" {...theme.tip.content}>
+              <Box
+                {...(isStringContent ? {} : { id: tooltipId, role: 'tooltip' })}
+                {...theme.tip.content}
+              >
                 {content}
               </Box>
             )}
