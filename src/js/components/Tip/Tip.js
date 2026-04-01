@@ -73,7 +73,7 @@ const Tip = forwardRef(
       'aria-describedby': isVisible
         ? [child.props['aria-describedby'], tooltipId]
             .filter(Boolean)
-            .join(' ') || undefined
+            .join(' ')
         : child.props['aria-describedby'],
       key: 'tip-child',
       ref: (node) => {
