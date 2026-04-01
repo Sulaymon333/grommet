@@ -187,7 +187,6 @@ exports[`Tip focus and blur events on the Tip's child 1`] = `
   class="c0"
 >
   <button
-    aria-describedby="_r_3_"
     class="c1"
     type="button"
   >
@@ -201,7 +200,6 @@ exports[`Tip focus and blur events on the Tip's child 2`] = `
   class="StyledGrommet-sc-19lkkz7-0 iQmOCy"
 >
   <button
-    aria-describedby="_r_3_"
     class="StyledButton-sc-323bzc-0 eJnOht"
     type="button"
   >
@@ -399,9 +397,7 @@ exports[`Tip plain 1`] = `
 `;
 
 exports[`Tip renders outside grommet wrapper 1`] = `
-<span
-  aria-describedby="_r_1_"
->
+<span>
    Example
 </span>
 `;
@@ -531,9 +527,7 @@ exports[`Tip should have no accessibility violations 1`] = `
 <div
   class="c0"
 >
-  <span
-    aria-describedby="_r_0_"
-  >
+  <span>
      Example
   </span>
 </div>
@@ -553,9 +547,7 @@ exports[`Tip should work with a child that isn't a React Element 1`] = `
 <div
   class="c0"
 >
-  <span
-    aria-describedby="_r_8_"
-  >
+  <span>
     Not React Element
   </span>
 </div>
@@ -575,9 +567,7 @@ exports[`Tip shouldn't crash with no children 1`] = `
 <div
   class="c0"
 >
-  <span
-    aria-describedby="_r_9_"
-  />
+  <span />
 </div>
 `;
 

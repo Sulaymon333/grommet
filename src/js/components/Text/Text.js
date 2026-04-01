@@ -20,9 +20,7 @@ const Text = forwardRef(
       as,
       tip: tipProp,
       // can't alphabetize a11yTitle before tip is defined
-      a11yTitle = (typeof tipProp === 'string' && tipProp) ||
-        tipProp?.content ||
-        undefined,
+      a11yTitle,
       truncate,
       size,
       skeleton: skeletonProp,

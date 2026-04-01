@@ -38,6 +38,7 @@ const Tip = forwardRef(
     const [tooltipOver, setTooltipOver] = useState(false);
     const usingKeyboard = useKeyboard();
     const tooltipId = useId();
+    const isVisible = over || tooltipOver;
 
     const componentRef = useForwardedRef(tipRef);
 
@@ -69,9 +70,11 @@ const Tip = forwardRef(
         if (usingKeyboard) setOver(false);
         if (child.props?.onBlur) child.props.onBlur(event);
       },
-      'aria-describedby': [child.props['aria-describedby'], tooltipId]
-        .filter(Boolean)
-        .join(' '),
+      'aria-describedby': isVisible
+        ? [child.props['aria-describedby'], tooltipId]
+            .filter(Boolean)
+            .join(' ') || undefined
+        : child.props['aria-describedby'],
       key: 'tip-child',
       ref: (node) => {
         // https://github.com/facebook/react/issues/8873#issuecomment-287873307
@@ -96,7 +99,7 @@ const Tip = forwardRef(
 
     return [
       clonedChild,
-      (over || tooltipOver) && (
+      isVisible && (
         <Keyboard
           key="tip-keyboard"
           onEsc={() => {
